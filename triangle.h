@@ -8,11 +8,11 @@ class Triangle: public Figure
 {
 public:
     Triangle(std::array<QPoint, 3> &vertices);
+    Triangle(const Triangle &trianlge);
     void draw(QPoint mousePosition, QPainter &painter) override;
     bool contains(QPoint p) override;
     void printInfo() override;
     void move(QPoint moveVector)override;
-    QAction* showMenu(QPoint point) override;
 
 private:
     std::array<QPoint, 3> m_vertices;

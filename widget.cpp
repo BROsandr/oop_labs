@@ -1,4 +1,5 @@
 #include "widget.h"
+#include "qmenu.h"
 #include "ui_widget.h"
 #include "circle.h"
 #include "triangle.h"
@@ -7,6 +8,7 @@
 #include <QMouseEvent>
 #include <array>
 #include <QAction>
+#include <QMenu>
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -32,6 +34,14 @@ Widget::~Widget()
 void Widget::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
+
+    for (auto &el : figures)
+        figures.remove_if([](std::unique_ptr<Figure> &ptr)
+        {
+            return ptr->deleted;
+        }
+            );
+
     QPainter painter(this); // Создаём объект отрисовщика
     // Устанавливаем кисть абриса
     painter.setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::FlatCap));
@@ -64,21 +74,11 @@ void Widget::mousePressEvent(QMouseEvent *event)
                 movedFigure = el.get();
     if (event->buttons() & Qt::RightButton)
         for (auto &el: figures)
-            if(el->contains(event->pos())){
-                QAction *action { el->showMenu(mapToGlobal(event->pos())) };
-                connect(action, &QAction::triggered, this, &Widget::doMenuAction);
-//                QAction *p = nullptr;
-//                p->trigger();
-            }
+            if(el->contains(event->pos()))
+                el->showMenu(mapToGlobal(event->pos()));
 }
 
 void Widget::mouseReleaseEvent(QMouseEvent *event)
 {
     movedFigure = nullptr;
-}
-
-void Widget::doMenuAction()
-{
-    assert(0 && "in do menu");
-    qDebug() << 'g';
 }

@@ -10,6 +10,12 @@ Square::Square(const QPointF &point, qreal length):
 {
 }
 
+Square::Square(const Square &square)
+{
+    m_point = square.m_point;
+    m_length = square.m_length;
+}
+
 void Square::draw(QPoint mousePosition, QPainter &painter)
 {
     if (contains(mousePosition))
@@ -31,13 +37,4 @@ void Square::printInfo()
 void Square::move(QPoint moveVector)
 {
     m_point += moveVector;
-}
-
-QAction* Square::showMenu(QPoint point)
-{
-    QMenu *menu = new QMenu;
-    QAction *action = new QAction{"Удалить"};
-    menu->addAction(action);
-    menu->exec(point);
-    return action;
 }

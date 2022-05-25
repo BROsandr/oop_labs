@@ -3,15 +3,23 @@
 
 #include "qaction.h"
 #include <QPainter>
+#include <QObject>
 
-class Figure
+class Figure: public QObject
 {
+    Q_OBJECT
+
 public:
+
     virtual void draw(QPoint mousePosition, QPainter &painter) = 0;
     virtual bool contains(QPoint p) = 0;
     virtual void printInfo() = 0;
     virtual void move(QPoint moveVector) = 0;
-    virtual QAction* showMenu(QPoint point) = 0;
+    void showMenu(QPoint position);
+    bool deleted { false };
+
+public slots:
+    void doMenuAction();
 };
 
 #endif // FIGURE_H

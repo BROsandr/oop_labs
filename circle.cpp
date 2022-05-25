@@ -9,6 +9,13 @@ Circle::Circle(const QPointF &center, qreal radius):
 {
 }
 
+Circle::Circle(const Circle &circle)
+{
+    m_center = circle.m_center;
+    m_radius = circle.m_radius;
+}
+
+
 void Circle::draw(QPoint mousePosition, QPainter &painter)
 {
     if (contains(mousePosition))
@@ -31,13 +38,4 @@ void Circle::printInfo()
 void Circle::move(QPoint moveVector)
 {
     m_center += moveVector;
-}
-
-QAction* Circle::showMenu(QPoint point)
-{
-    QMenu *menu = new QMenu;
-    QAction *action = new QAction{"Удалить"};
-    menu->addAction(action);
-    menu->exec(point);
-    return action;
 }

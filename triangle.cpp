@@ -8,6 +8,11 @@ Triangle::Triangle(std::array<QPoint, 3> &vertices):
 {
 }
 
+Triangle::Triangle(const Triangle &trianlge)
+{
+    m_vertices = trianlge.m_vertices;
+}
+
 void Triangle::draw(QPoint mousePosition, QPainter &painter)
 {
 
@@ -41,13 +46,4 @@ void Triangle::move(QPoint moveVector)
 {
     for (auto &el: m_vertices)
         el += moveVector;
-}
-
-QAction* Triangle::showMenu(QPoint point)
-{
-    QMenu *menu = new QMenu;
-    QAction *action = new QAction{"Удалить"};
-    menu->addAction(action);
-    menu->exec(point);
-    return action;
 }

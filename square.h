@@ -7,11 +7,11 @@ class Square: public Figure
 {
 public:
     Square(const QPointF &point, qreal length);
+    Square(const Square &square);
     void draw(QPoint mousePosition, QPainter &painter) override;
     bool contains(QPoint p) override;
     void printInfo() override;
     void move(QPoint moveVector)override;
-    QAction* showMenu(QPoint point) override;
 
 private:
     QPointF m_point{-1, -1};

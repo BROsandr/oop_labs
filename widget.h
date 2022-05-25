@@ -32,9 +32,6 @@ private:
     Figure *movedFigure { nullptr };
     void mouseReleaseEvent(QMouseEvent *event) override;
 
-private slots:
-    void doMenuAction();
-
 };
 
 #endif // WIDGET_H

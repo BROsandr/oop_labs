@@ -9,6 +9,8 @@ QT       += core gui
 #QMAKE_CXXFLAGS += /fsanitize=address
 #QMAKE_LFLAGS += /fsanitize=address
 
+CONFIG += c++20
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = painter
@@ -17,6 +19,7 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         circle.cpp \
+        figure.cpp \
         square.cpp \
         triangle.cpp \
         widget.cpp
